@@ -1,0 +1,1 @@
+scp -i ~/.ssh/sanjeevani-web.pem -r build  ubuntu@ec2-13-59-105-105.us-east-2.compute.amazonaws.com:/home/ubuntu/sanjeevani-cms/

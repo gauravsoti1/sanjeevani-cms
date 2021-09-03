@@ -397,6 +397,127 @@ type deleteHomepagePayload {
   homepage: Homepage
 }
 
+type TeamMembers {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String
+  qualifications: String!
+  about: String
+  description: String!
+  published_at: DateTime
+  media(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+}
+
+type TeamMembersConnection {
+  values: [TeamMembers]
+  groupBy: TeamMembersGroupBy
+  aggregate: TeamMembersAggregator
+}
+
+type TeamMembersAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TeamMembersGroupBy {
+  id: [TeamMembersConnectionId]
+  created_at: [TeamMembersConnectionCreated_at]
+  updated_at: [TeamMembersConnectionUpdated_at]
+  name: [TeamMembersConnectionName]
+  qualifications: [TeamMembersConnectionQualifications]
+  about: [TeamMembersConnectionAbout]
+  description: [TeamMembersConnectionDescription]
+  published_at: [TeamMembersConnectionPublished_at]
+}
+
+type TeamMembersConnectionId {
+  key: ID
+  connection: TeamMembersConnection
+}
+
+type TeamMembersConnectionCreated_at {
+  key: DateTime
+  connection: TeamMembersConnection
+}
+
+type TeamMembersConnectionUpdated_at {
+  key: DateTime
+  connection: TeamMembersConnection
+}
+
+type TeamMembersConnectionName {
+  key: String
+  connection: TeamMembersConnection
+}
+
+type TeamMembersConnectionQualifications {
+  key: String
+  connection: TeamMembersConnection
+}
+
+type TeamMembersConnectionAbout {
+  key: String
+  connection: TeamMembersConnection
+}
+
+type TeamMembersConnectionDescription {
+  key: String
+  connection: TeamMembersConnection
+}
+
+type TeamMembersConnectionPublished_at {
+  key: DateTime
+  connection: TeamMembersConnection
+}
+
+input TeamMemberInput {
+  name: String
+  media: [ID]
+  qualifications: String!
+  about: String
+  description: String!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editTeamMemberInput {
+  name: String
+  media: [ID]
+  qualifications: String
+  about: String
+  description: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createTeamMemberInput {
+  data: TeamMemberInput
+}
+
+type createTeamMemberPayload {
+  teamMember: TeamMembers
+}
+
+input updateTeamMemberInput {
+  where: InputID
+  data: editTeamMemberInput
+}
+
+type updateTeamMemberPayload {
+  teamMember: TeamMembers
+}
+
+input deleteTeamMemberInput {
+  where: InputID
+}
+
+type deleteTeamMemberPayload {
+  teamMember: TeamMembers
+}
+
 type Writer {
   id: ID!
   created_at: DateTime!
@@ -1004,7 +1125,7 @@ input editComponentSharedSeoInput {
   shareImage: ID
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Article | ArticleConnection | ArticleAggregator | ArticleGroupBy | ArticleConnectionId | ArticleConnectionCreated_at | ArticleConnectionUpdated_at | ArticleConnectionTitle | ArticleConnectionDescription | ArticleConnectionContent | ArticleConnectionSlug | ArticleConnectionCategory | ArticleConnectionImage | ArticleConnectionAuthor | ArticleConnectionKeywords | ArticleConnectionPublished_at | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnectionCreated_at | CategoryConnectionUpdated_at | CategoryConnectionName | CategoryConnectionSlug | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Gallery | updateGalleryPayload | deleteGalleryPayload | Global | updateGlobalPayload | deleteGlobalPayload | Homepage | updateHomepagePayload | deleteHomepagePayload | Writer | WriterConnection | WriterAggregator | WriterGroupBy | WriterConnectionId | WriterConnectionCreated_at | WriterConnectionUpdated_at | WriterConnectionName | WriterConnectionPicture | WriterConnectionEmail | createWriterPayload | updateWriterPayload | deleteWriterPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentSectionsHero | ComponentSharedSeo
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Article | ArticleConnection | ArticleAggregator | ArticleGroupBy | ArticleConnectionId | ArticleConnectionCreated_at | ArticleConnectionUpdated_at | ArticleConnectionTitle | ArticleConnectionDescription | ArticleConnectionContent | ArticleConnectionSlug | ArticleConnectionCategory | ArticleConnectionImage | ArticleConnectionAuthor | ArticleConnectionKeywords | ArticleConnectionPublished_at | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnectionCreated_at | CategoryConnectionUpdated_at | CategoryConnectionName | CategoryConnectionSlug | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Gallery | updateGalleryPayload | deleteGalleryPayload | Global | updateGlobalPayload | deleteGlobalPayload | Homepage | updateHomepagePayload | deleteHomepagePayload | TeamMembers | TeamMembersConnection | TeamMembersAggregator | TeamMembersGroupBy | TeamMembersConnectionId | TeamMembersConnectionCreated_at | TeamMembersConnectionUpdated_at | TeamMembersConnectionName | TeamMembersConnectionQualifications | TeamMembersConnectionAbout | TeamMembersConnectionDescription | TeamMembersConnectionPublished_at | createTeamMemberPayload | updateTeamMemberPayload | deleteTeamMemberPayload | Writer | WriterConnection | WriterAggregator | WriterGroupBy | WriterConnectionId | WriterConnectionCreated_at | WriterConnectionUpdated_at | WriterConnectionName | WriterConnectionPicture | WriterConnectionEmail | createWriterPayload | updateWriterPayload | deleteWriterPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentSectionsHero | ComponentSharedSeo
 
 input InputID {
   id: ID!
@@ -1032,6 +1153,9 @@ type Query {
   gallery(publicationState: PublicationState): Gallery
   global(publicationState: PublicationState): Global
   homepage(publicationState: PublicationState): Homepage
+  teamMember(id: ID!, publicationState: PublicationState): TeamMembers
+  teamMembers(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [TeamMembers]
+  teamMembersConnection(sort: String, limit: Int, start: Int, where: JSON): TeamMembersConnection
   writer(id: ID!, publicationState: PublicationState): Writer
   writers(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Writer]
   writersConnection(sort: String, limit: Int, start: Int, where: JSON): WriterConnection
@@ -1063,6 +1187,9 @@ type Mutation {
   deleteGlobal: deleteGlobalPayload
   updateHomepage(input: updateHomepageInput): updateHomepagePayload
   deleteHomepage: deleteHomepagePayload
+  createTeamMember(input: createTeamMemberInput): createTeamMemberPayload
+  updateTeamMember(input: updateTeamMemberInput): updateTeamMemberPayload
+  deleteTeamMember(input: deleteTeamMemberInput): deleteTeamMemberPayload
   createWriter(input: createWriterInput): createWriterPayload
   updateWriter(input: updateWriterInput): updateWriterPayload
   deleteWriter(input: deleteWriterInput): deleteWriterPayload
