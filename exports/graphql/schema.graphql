@@ -518,6 +518,115 @@ type deleteTeamMemberPayload {
   teamMember: TeamMembers
 }
 
+type Testimonials {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  patient_name: String
+  media: UploadFile
+  experience: String
+  published_at: DateTime
+}
+
+type TestimonialsConnection {
+  values: [Testimonials]
+  groupBy: TestimonialsGroupBy
+  aggregate: TestimonialsAggregator
+}
+
+type TestimonialsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TestimonialsGroupBy {
+  id: [TestimonialsConnectionId]
+  created_at: [TestimonialsConnectionCreated_at]
+  updated_at: [TestimonialsConnectionUpdated_at]
+  patient_name: [TestimonialsConnectionPatient_name]
+  media: [TestimonialsConnectionMedia]
+  experience: [TestimonialsConnectionExperience]
+  published_at: [TestimonialsConnectionPublished_at]
+}
+
+type TestimonialsConnectionId {
+  key: ID
+  connection: TestimonialsConnection
+}
+
+type TestimonialsConnectionCreated_at {
+  key: DateTime
+  connection: TestimonialsConnection
+}
+
+type TestimonialsConnectionUpdated_at {
+  key: DateTime
+  connection: TestimonialsConnection
+}
+
+type TestimonialsConnectionPatient_name {
+  key: String
+  connection: TestimonialsConnection
+}
+
+type TestimonialsConnectionMedia {
+  key: ID
+  connection: TestimonialsConnection
+}
+
+type TestimonialsConnectionExperience {
+  key: String
+  connection: TestimonialsConnection
+}
+
+type TestimonialsConnectionPublished_at {
+  key: DateTime
+  connection: TestimonialsConnection
+}
+
+input TestimonialInput {
+  patient_name: String
+  media: ID
+  experience: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editTestimonialInput {
+  patient_name: String
+  media: ID
+  experience: String
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createTestimonialInput {
+  data: TestimonialInput
+}
+
+type createTestimonialPayload {
+  testimonial: Testimonials
+}
+
+input updateTestimonialInput {
+  where: InputID
+  data: editTestimonialInput
+}
+
+type updateTestimonialPayload {
+  testimonial: Testimonials
+}
+
+input deleteTestimonialInput {
+  where: InputID
+}
+
+type deleteTestimonialPayload {
+  testimonial: Testimonials
+}
+
 type Writer {
   id: ID!
   created_at: DateTime!
@@ -1125,7 +1234,7 @@ input editComponentSharedSeoInput {
   shareImage: ID
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Article | ArticleConnection | ArticleAggregator | ArticleGroupBy | ArticleConnectionId | ArticleConnectionCreated_at | ArticleConnectionUpdated_at | ArticleConnectionTitle | ArticleConnectionDescription | ArticleConnectionContent | ArticleConnectionSlug | ArticleConnectionCategory | ArticleConnectionImage | ArticleConnectionAuthor | ArticleConnectionKeywords | ArticleConnectionPublished_at | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnectionCreated_at | CategoryConnectionUpdated_at | CategoryConnectionName | CategoryConnectionSlug | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Gallery | updateGalleryPayload | deleteGalleryPayload | Global | updateGlobalPayload | deleteGlobalPayload | Homepage | updateHomepagePayload | deleteHomepagePayload | TeamMembers | TeamMembersConnection | TeamMembersAggregator | TeamMembersGroupBy | TeamMembersConnectionId | TeamMembersConnectionCreated_at | TeamMembersConnectionUpdated_at | TeamMembersConnectionName | TeamMembersConnectionQualifications | TeamMembersConnectionAbout | TeamMembersConnectionDescription | TeamMembersConnectionPublished_at | createTeamMemberPayload | updateTeamMemberPayload | deleteTeamMemberPayload | Writer | WriterConnection | WriterAggregator | WriterGroupBy | WriterConnectionId | WriterConnectionCreated_at | WriterConnectionUpdated_at | WriterConnectionName | WriterConnectionPicture | WriterConnectionEmail | createWriterPayload | updateWriterPayload | deleteWriterPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentSectionsHero | ComponentSharedSeo
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Article | ArticleConnection | ArticleAggregator | ArticleGroupBy | ArticleConnectionId | ArticleConnectionCreated_at | ArticleConnectionUpdated_at | ArticleConnectionTitle | ArticleConnectionDescription | ArticleConnectionContent | ArticleConnectionSlug | ArticleConnectionCategory | ArticleConnectionImage | ArticleConnectionAuthor | ArticleConnectionKeywords | ArticleConnectionPublished_at | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | CategoryConnection | CategoryAggregator | CategoryGroupBy | CategoryConnectionId | CategoryConnectionCreated_at | CategoryConnectionUpdated_at | CategoryConnectionName | CategoryConnectionSlug | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Gallery | updateGalleryPayload | deleteGalleryPayload | Global | updateGlobalPayload | deleteGlobalPayload | Homepage | updateHomepagePayload | deleteHomepagePayload | TeamMembers | TeamMembersConnection | TeamMembersAggregator | TeamMembersGroupBy | TeamMembersConnectionId | TeamMembersConnectionCreated_at | TeamMembersConnectionUpdated_at | TeamMembersConnectionName | TeamMembersConnectionQualifications | TeamMembersConnectionAbout | TeamMembersConnectionDescription | TeamMembersConnectionPublished_at | createTeamMemberPayload | updateTeamMemberPayload | deleteTeamMemberPayload | Testimonials | TestimonialsConnection | TestimonialsAggregator | TestimonialsGroupBy | TestimonialsConnectionId | TestimonialsConnectionCreated_at | TestimonialsConnectionUpdated_at | TestimonialsConnectionPatient_name | TestimonialsConnectionMedia | TestimonialsConnectionExperience | TestimonialsConnectionPublished_at | createTestimonialPayload | updateTestimonialPayload | deleteTestimonialPayload | Writer | WriterConnection | WriterAggregator | WriterGroupBy | WriterConnectionId | WriterConnectionCreated_at | WriterConnectionUpdated_at | WriterConnectionName | WriterConnectionPicture | WriterConnectionEmail | createWriterPayload | updateWriterPayload | deleteWriterPayload | I18NLocale | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload | ComponentSectionsHero | ComponentSharedSeo
 
 input InputID {
   id: ID!
@@ -1156,6 +1265,9 @@ type Query {
   teamMember(id: ID!, publicationState: PublicationState): TeamMembers
   teamMembers(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [TeamMembers]
   teamMembersConnection(sort: String, limit: Int, start: Int, where: JSON): TeamMembersConnection
+  testimonial(id: ID!, publicationState: PublicationState): Testimonials
+  testimonials(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Testimonials]
+  testimonialsConnection(sort: String, limit: Int, start: Int, where: JSON): TestimonialsConnection
   writer(id: ID!, publicationState: PublicationState): Writer
   writers(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Writer]
   writersConnection(sort: String, limit: Int, start: Int, where: JSON): WriterConnection
@@ -1190,6 +1302,9 @@ type Mutation {
   createTeamMember(input: createTeamMemberInput): createTeamMemberPayload
   updateTeamMember(input: updateTeamMemberInput): updateTeamMemberPayload
   deleteTeamMember(input: deleteTeamMemberInput): deleteTeamMemberPayload
+  createTestimonial(input: createTestimonialInput): createTestimonialPayload
+  updateTestimonial(input: updateTestimonialInput): updateTestimonialPayload
+  deleteTestimonial(input: deleteTestimonialInput): deleteTestimonialPayload
   createWriter(input: createWriterInput): createWriterPayload
   updateWriter(input: updateWriterInput): updateWriterPayload
   deleteWriter(input: deleteWriterInput): deleteWriterPayload
